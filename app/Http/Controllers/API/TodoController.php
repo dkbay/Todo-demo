@@ -23,7 +23,7 @@ class TodoController extends Controller
 		if ($isAdmin) {
 			return Todo::all();
 		}
-		return Todo::all()->where('user_id', Auth::id());
+		return Todo::where('user_id', Auth::id())->get();
 	}
 
 	/**
