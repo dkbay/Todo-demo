@@ -13,7 +13,6 @@ class Todo extends Model
 	 */
 	protected $fillable = [
 		'title',
-		'description',
 	];
 
 	/**
@@ -24,7 +23,6 @@ class Todo extends Model
 	protected $visible = [
 		'id',
 		'title',
-		'description',
 	];
 
 	/**
