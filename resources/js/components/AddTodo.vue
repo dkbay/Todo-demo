@@ -1,6 +1,6 @@
 <template>
   <div id="AddTodoContainer">
-    <input v-model="todo" placeholder="Opgave titel" maxlength="255" type="text">
+    <input @keyup.enter="createTodo" v-model="todo" placeholder="Opgave titel" maxlength="255" type="text">
     <button @click="createTodo" class="btn btn-info">
       Tilføj
     </button>

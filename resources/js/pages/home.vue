@@ -4,6 +4,7 @@
       Din todo liste
     </h1>
 
+    <Spinner :loading="isLoading" />
     <AddTodo />
 
     <ul class="list-group mt-4">
@@ -35,12 +36,14 @@ import Form from 'vform'
 import axios from 'axios'
 import $ from 'jquery'
 import AddTodo from '~/components/AddTodo'
+import Spinner from '~/components/Spinner'
 
 export default {
   middleware: 'auth',
 
   components: {
-    AddTodo
+    AddTodo,
+    Spinner
   },
 
   metaInfo () {
@@ -51,7 +54,8 @@ export default {
     form: new Form({
       title: ''
     }),
-    todos: []
+    todos: [],
+    isLoading: true
   }),
 
   mounted () {
@@ -61,31 +65,41 @@ export default {
         todos.forEach((todo) => todo.editing = false)
         this.todos = todos
       })
+    this.isLoading = false
   },
 
   methods: {
     async deleteTodo (id) {
+      this.isLoading = true
+      let i = this.todos.map(todo => todo.id).indexOf(id)
+      this.todos.splice(i, 1)
       axios.post('/api/todos/' + id, {
         _method: 'delete'
       })
-      let i = this.todos.map(todo => todo.id).indexOf(id)
-      this.todos.splice(i, 1)
+      this.isLoading = false
     },
     async updateTodos () {
+      this.isLoading = true
       axios.get('/api/todos')
         .then(response => {
           let todos = response.data
           todos.forEach((todo) => todo.editing = false)
           this.todos = todos
         })
+      this.isLoading = false
     },
     async createTodo (title) {
+      this.isLoading = true
       axios.post('/api/todos', {
         title: title
       })
-        .then(response => this.updateTodos())
+        .then(response => {
+          this.updateTodos()
+          this.isLoading = false
+        })
     },
     async editTodo (id) {
+      this.isLoading = true
       let i = this.todos.map(todo => todo.id).indexOf(id)
       if (this.todos[i].editing === false) {
         this.todos[i].editing = true
@@ -97,6 +111,7 @@ export default {
         })
         this.todos[i].editing = false
       }
+      this.isLoading = false
     }
   }
 }
