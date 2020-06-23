@@ -87,11 +87,9 @@ export default {
     },
     async editTodo (id) {
       let i = this.todos.map(todo => todo.id).indexOf(id)
-      console.log(i)
       if (this.todos[i].editing === false) {
         this.todos[i].editing = true
       } else {
-        console.log($('#' + id).val())
         this.todos[i].title = $('#' + id).val()
         axios.post('/api/todos/' + id, {
           _method: 'put',
@@ -106,7 +104,7 @@ export default {
 
 <style scoped>
     h1 {
-        color: #415459;
+      color: #415459;
     }
 
     p {
@@ -115,14 +113,16 @@ export default {
       word-wrap: break-word;
       color: #415459;
       line-height: 28px;
-      padding-left:16px;
+      padding-left:11px;
     }
 
     input {
-        padding-left: 10px;
-        padding-right: 10px;
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        border-radius: 35px;
-        outline: none;
+      display: block;
+      width: 85%;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-radius: 35px;
+      outline: none;
     }
 </style>
