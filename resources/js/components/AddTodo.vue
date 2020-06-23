@@ -1,6 +1,6 @@
 <template>
   <div id="AddTodoContainer">
-    <input v-model="todo" placeholder="Opgave titel" type="text">
+    <input v-model="todo" placeholder="Opgave titel" maxlength="255" type="text">
     <button @click="createTodo" class="btn btn-info">
       Tilføj
     </button>
@@ -36,5 +36,12 @@ export default {
   input {
     padding-left:15px;
     padding-right:15px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 35px;
+    outline: none;
+  }
+  button {
+    border-radius: 35px;
+    background-color: #0ea389;
   }
 </style>

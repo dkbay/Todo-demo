@@ -6,21 +6,23 @@
 
     <AddTodo />
 
-    <ul class="list-group mt-2">
-      <li v-for="todo in todos" :key="todo.id" class="list-group-item d-flex justify-content-between align-items-center">
-        <input v-if="todo.editing" :id="todo.id" :value="todo.title" type="text">
+    <ul class="list-group mt-4">
+      <li v-for="todo in todos" :key="todo.id"
+          class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <input v-if="todo.editing" :id="todo.id" :value="todo.title" maxlength="255" type="text">
         <p v-else class="mb-0">
           {{ todo.title }}
         </p>
         <div>
           <a v-if="todo.editing" href="#" @click="editTodo(todo.id)">
-            <fa size="lg" :style="{color: '#007bff'}" :icon="['fa', 'save']" />
+            <fa size="lg" :style="{color: '#0ea389'}" :icon="['fa', 'save']" />
           </a>
           <a v-else href="#" @click="editTodo(todo.id)">
-            <fa size="lg" :style="{color: '#007bff'}" :icon="['fa', 'edit']" />
+            <fa size="lg" :style="{color: '#0ea389'}" :icon="['fa', 'edit']" />
           </a>
           <a class="ml-3" href="#" @click="deleteTodo(todo.id)">
-            <fa size="lg" :style="{color: '#dc3545'}" :icon="['fas', 'trash-alt']" />
+            <fa size="lg" :style="{color: '#cc4141'}" :icon="['fas', 'trash-alt']" />
           </a>
         </div>
       </li>
@@ -101,3 +103,26 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+    h1 {
+        color: #415459;
+    }
+
+    p {
+      max-width: 85%;
+      display: block;
+      word-wrap: break-word;
+      color: #415459;
+      line-height: 28px;
+      padding-left:16px;
+    }
+
+    input {
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 35px;
+        outline: none;
+    }
+</style>
